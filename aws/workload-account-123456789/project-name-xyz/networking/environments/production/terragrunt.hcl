@@ -10,20 +10,6 @@ locals {
   dynamodb_table_name = local.parent_config.locals.dynamodb_table_name
 }
 
-generate "provider" {
-  path      = "provider.tf"
-  if_exists = "overwrite"
-  contents  = <<EOF
-  provider "aws" {
-    region = var.region
-  }
-  provider "aws" {
-    alias = "us-east-1"
-    region = "us-east-1"
-  }
-EOF
-}
-
 terraform {
   source = "git@github.com:prakashkukanoor/terraform-aws-s3-module.git"
 }
