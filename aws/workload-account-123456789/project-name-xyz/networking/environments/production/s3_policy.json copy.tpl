@@ -10,6 +10,11 @@
           "arn:aws:s3:::${bucket_id}",
           "arn:aws:s3:::${bucket_id}/*"
         ]
+        Condition = {
+          StringEquals = {
+            "aws:SourceVpce" = "vpce-xxxxxxxxxxxxxxxxx" # Replace with your Gateway Endpoint ID
+          }
+        }
       },
       # Deny any request that does not use HTTPS (enforces TLS)
       {
