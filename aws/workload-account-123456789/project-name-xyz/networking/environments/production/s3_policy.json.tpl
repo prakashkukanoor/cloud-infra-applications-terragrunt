@@ -1,30 +1,33 @@
 {
-    Version = "2012-10-17",
-    Statement = [
-      # Allow access from a specific VPC Gateway Endpoint
-      {
-        Effect = "Allow"
-        Principal = "*"
-        Action = "s3:*"
-        Resource = [
-          "arn:aws:s3:::${bucket_id}",
-          "arn:aws:s3:::${bucket_id}/*"
-        ]
-      },
-      # Deny any request that does not use HTTPS (enforces TLS)
-      {
-        Effect = "Deny"
-        Principal = "*"
-        Action = "s3:*"
-        Resource = [
-          "arn:aws:s3:::${bucket_id}",
-          "arn:aws:s3:::${bucket_id}/*"
-        ]
-        Condition = {
-          Bool = {
-            "aws:SecureTransport" = "false"
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": [
+          "arn:aws:iam::905418359995:user/cloud_user"
+        ]},
+      "Action": [
+        "s3:GetObject",
+        "s3:DeleteObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::${bucket}/*"
+      ]
+    },
+    {
+        "Effect": "Deny",
+        "Principal": "*",
+        "Action": "*",
+        "Resource": [
+          "arn:aws:s3:::${bucket}",
+          "arn:aws:s3:::${bucket}/*"
+        ],
+        "Condition": {
+          "Bool": {
+            "aws:SecureTransport": "false"
           }
         }
       }
-    ]
-  }
+  ]
+}
