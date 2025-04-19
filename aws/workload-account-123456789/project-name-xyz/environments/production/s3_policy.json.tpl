@@ -5,7 +5,7 @@
       "Effect": "Allow",
       "Principal": {
         "AWS": [
-          "arn:aws:iam::905418359995:user/cloud_user"
+          "arn:aws:iam::211125587400:user/cloud_user"
         ]},
       "Action": [
         "s3:GetObject",
