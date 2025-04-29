@@ -4,7 +4,8 @@ include "root" {
 }
 
 terraform {
-  source = "git@github.com:prakashkukanoor/terraform-aws-s3-module.git"
+  # source = "git@github.com:prakashkukanoor/terraform-aws-s3-module.git"
+  source = "git@github.com:prakashkukanoor/terraform-aws-module-root.git"
 }
 
 # Define specific values for this child configuration
