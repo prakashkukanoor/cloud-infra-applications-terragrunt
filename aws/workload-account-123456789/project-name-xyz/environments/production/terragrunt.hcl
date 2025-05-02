@@ -4,7 +4,6 @@ include "root" {
 }
 
 terraform {
-  # source = "git@github.com:prakashkukanoor/terraform-aws-s3-module.git"
   source = "git@github.com:prakashkukanoor/terraform-aws-module-root.git"
 }
 
@@ -14,6 +13,7 @@ locals {
   bucket_name         = local.parent_config.locals.bucket_name
   dynamodb_table_name = local.parent_config.locals.dynamodb_table_name
   current_dir = get_terragrunt_dir()
+  arn = "arn:aws:iam::533267041711:user/cloud_user"
 }
 
 inputs = {
@@ -24,11 +24,17 @@ inputs = {
   applications = {
     functional_domain_01 = {
       buckets = ["product-001"]
-      policy_json_tpl_file_path = "${get_terragrunt_dir()}/s3_policy.json.tpl"
+      dynamodb_tables = ["dynamo-db-001"]
+      arn = local.arn
+      s3_policy_json_tpl_path = "${get_terragrunt_dir()}/s3_policy.json.tpl"
+      dynamo_db_policy_json_tpl_path = "${get_terragrunt_dir()}/dynamodb_policy.json.tpl"
     }
     functional_domain_02 = {
       buckets = ["product-002"]
-      policy_json_tpl_file_path = "${get_terragrunt_dir()}/s3_policy.json.tpl"
+      dynamodb_tables = ["dynamo-db-002"]
+      arn = local.arn
+      s3_policy_json_tpl_path = "${get_terragrunt_dir()}/s3_policy.json.tpl"
+      dynamo_db_policy_json_tpl_path = "${get_terragrunt_dir()}/dynamodb_policy.json.tpl"
     }
 
   }

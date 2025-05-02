@@ -2,28 +2,27 @@
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Effect": "Allow",
+      "Sid": "DynamoDBCrudAccess",
       "Principal": {
         "AWS": [
           "${arn}"
         ]},
+      "Effect": "Allow",
       "Action": [
-        "s3:GetObject",
-        "s3:PutObject",
-        "s3:DeleteObject"
+        "dynamodb:PutItem",
+        "dynamodb:GetItem",
+        "dynamodb:Query",
+        "dynamodb:Scan",
+        "dynamodb:UpdateItem",
+        "dynamodb:DeleteItem"
       ],
-      "Resource": [
-        "arn:aws:s3:::${bucket}/*"
-      ]
+      "Resource": "arn:aws:dynamodb:*:*:table/${name}"
     },
     {
         "Effect": "Deny",
         "Principal": "*",
         "Action": "*",
-        "Resource": [
-          "arn:aws:s3:::${bucket}",
-          "arn:aws:s3:::${bucket}/*"
-        ],
+        "Resource": "arn:aws:dynamodb:*:*:table/${name}",
         "Condition": {
           "Bool": {
             "aws:SecureTransport": "false"
