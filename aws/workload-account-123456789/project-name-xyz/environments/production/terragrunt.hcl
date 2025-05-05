@@ -13,7 +13,7 @@ locals {
   bucket_name         = local.parent_config.locals.bucket_name
   dynamodb_table_name = local.parent_config.locals.dynamodb_table_name
   current_dir = get_terragrunt_dir()
-  arn = "arn:aws:iam::533267041711:user/cloud_user"
+  arn = "arn:aws:iam::637423456632:user/cloud_user"
 }
 
 inputs = {
@@ -48,6 +48,9 @@ inputs = {
     events        = true
   }
   
+  instance_type = "t2.micro"
+  number_of_ec2 = 2
+  filter_name = "al2023-ami-2023.*-x86_64"
   applications = {
     functional_domain_01 = {
       buckets = ["product-001"]
