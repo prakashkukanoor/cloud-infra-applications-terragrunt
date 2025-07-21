@@ -13,7 +13,7 @@ locals {
   bucket_name         = local.parent_config.locals.bucket_name
   dynamodb_table_name = local.parent_config.locals.dynamodb_table_name
   current_dir = get_terragrunt_dir()
-  arn = "arn:aws:iam::637423456632:user/cloud_user"
+  arn = "arn:aws:iam::646558713315:user/cloud_user"
 }
 
 inputs = {
@@ -53,18 +53,18 @@ inputs = {
   filter_name = "al2023-ami-2023.*-x86_64"
   applications = {
     functional_domain_01 = {
-      buckets = ["product-001"]
-      dynamodb_tables = ["dynamo-db-001"]
+      buckets = ["product-101"]
+      dynamodb_tables = ["dynamo-db-101"]
       arn = local.arn
-      s3_policy_json_tpl_path = "${get_terragrunt_dir()}/s3_policy.json.tpl"
-      dynamo_db_policy_json_tpl_path = "${get_terragrunt_dir()}/dynamodb_policy.json.tpl"
+      s3_policy_json_tpl_path = "${get_terragrunt_dir()}/policy/s3_policy.json.tpl"
+      dynamo_db_policy_json_tpl_path = "${get_terragrunt_dir()}/policy/dynamodb_policy.json.tpl"
     }
     functional_domain_02 = {
-      buckets = ["product-002"]
-      dynamodb_tables = ["dynamo-db-002"]
+      buckets = ["product-102"]
+      dynamodb_tables = ["dynamo-db-102"]
       arn = local.arn
-      s3_policy_json_tpl_path = "${get_terragrunt_dir()}/s3_policy.json.tpl"
-      dynamo_db_policy_json_tpl_path = "${get_terragrunt_dir()}/dynamodb_policy.json.tpl"
+      s3_policy_json_tpl_path = "${get_terragrunt_dir()}/policy/s3_policy.json.tpl"
+      dynamo_db_policy_json_tpl_path = "${get_terragrunt_dir()}/policy/dynamodb_policy.json.tpl"
     }
 
   }
