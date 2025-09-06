@@ -13,7 +13,7 @@ locals {
   bucket_name         = local.parent_config.locals.bucket_name
   dynamodb_table_name = local.parent_config.locals.dynamodb_table_name
   current_dir = get_terragrunt_dir()
-  arn = "arn:aws:iam::654654454176:user/cloud_user"
+  arn = "arn:aws:iam::114657496116:user/admin"
 }
 
 inputs = {
