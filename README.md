@@ -22,6 +22,12 @@ Repository for applications to configure the cloud infrastructure using terragru
     terragrunt run-all apply -auto-approve
 ```
 
+* Delete terragrunt files:
+```
+    find . -name ".terraform.lock.hcl" -type f -delete -o -name ".terragrunt-cache" -type d -exec rm -rf {} +
+```
+
+
 ## Kubernetes Commands
 * Add cluster to kube config: 
 ```
