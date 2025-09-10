@@ -1,11 +1,16 @@
 #Include the parent terragrunt.hcl to inherit the remote_state block
+include "root" {
+  path = find_in_parent_folders("root.hcl")
+}
+
 include "sources" {
   path   = find_in_parent_folders("sources.hcl")
   expose = true
 }
 
-include "remote_state" {
-  path   = find_in_parent_folders("tf-remote-state.hcl")
+include "regional" {
+  path   = find_in_parent_folders("regional.hcl")
+  expose = true
 }
 
 terraform {
@@ -14,7 +19,7 @@ terraform {
 
 
 inputs = {
-  region      = "us-east-1"
+  region      = include.regional.locals.region
   team        = "devops"
   environment = "dev"
 

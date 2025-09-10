@@ -3,14 +3,9 @@ include "root" {
   path = find_in_parent_folders("root.hcl")
 }
 
-locals {
-  cluster_name        = "purchase"
-  arn                 = "arn:aws:iam::851725450272:user/tf-admin"
-  region              = "us-east-1"
-}
-
-include "root" {
-  path = find_in_parent_folders("root.hcl")
+include "regional" {
+  path   = find_in_parent_folders("regional.hcl")
+  expose = true
 }
 
 include "sources" {
@@ -18,19 +13,21 @@ include "sources" {
   expose = true
 }
 
+locals {
+  cluster_name        = "purchase"
+  arn                 = "arn:aws:iam::590183891242:user/tf-admin"
+}
+
 dependency "networking" {
-  config_path = "${dirname(find_in_parent_folders("sources.hcl"))}/${local.region}/foundation/networking"
+  config_path = "${dirname(find_in_parent_folders("sources.hcl"))}/${include.regional.locals.region}/foundation/networking"
 }
 
 terraform {
   source = include.sources.locals.tf_module_repos.eks
 }
 
-# Define specific values for this child configuration
-
-
 inputs = {
-  region      = local.region
+  region      = include.regional.locals.region
   team        = "devops"
   environment = "dev"
 
