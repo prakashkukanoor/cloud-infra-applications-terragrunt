@@ -1,11 +1,22 @@
-#Include the parent terragrunt.hcl to inherit the remote_state block
+#Include the parent terragrunt.hcl to inherit the remo
+locals {
+  cluster_name        = "purchase"
+  arn                 = "arn:aws:iam::659260838969:user/terraform-admin"
+  region              = "us-east-1"
+}
+
+include "tf_state" {
+  path   = find_in_parent_folders("tf-remote-state.hcl")
+  expose = true
+}
+
 include "sources" {
   path   = find_in_parent_folders("sources.hcl")
   expose = true
 }
 
 dependency "networking" {
-  config_path = "${dirname(find_in_parent_folders("sources.hcl"))}/global/networking"
+  config_path = "${dirname(find_in_parent_folders("sources.hcl"))}/${local.region}/foundation/networking"
 }
 
 terraform {
@@ -13,18 +24,10 @@ terraform {
 }
 
 # Define specific values for this child configuration
-locals {
-  sources             = read_terragrunt_config(find_in_parent_folders("sources.hcl"))
-  parent_config       = read_terragrunt_config(find_in_parent_folders("common.hcl"))
-  bucket_name         = local.parent_config.locals.bucket_name
-  dynamodb_table_name = local.parent_config.locals.dynamodb_table_name
-  current_dir         = get_terragrunt_dir()
-  cluster_name        = split("eks-", local.current_dir)[1]
-  arn                 = "arn:aws:iam::851725238641:user/admin-terraform"
-}
+
 
 inputs = {
-  region      = "us-east-1"
+  region      = local.region
   team        = "devops"
   environment = "dev"
 

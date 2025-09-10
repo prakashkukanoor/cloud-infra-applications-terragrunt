@@ -1,7 +1,6 @@
 locals {
-  common_vars = read_terragrunt_config(find_in_parent_folders("common.hcl"))
-  bucket_name         = local.common_vars.locals.bucket_name
-  dynamodb_table_name = local.common_vars.locals.dynamodb_table_name
+  bucket_name         = "infra-applications-terraform-satefile-14"
+  dynamodb_table_name = "infra-applications-terraform-state-lock-14"
 }
 
 remote_state {

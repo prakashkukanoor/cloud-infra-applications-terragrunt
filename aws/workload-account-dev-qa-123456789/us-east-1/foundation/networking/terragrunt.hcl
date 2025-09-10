@@ -4,6 +4,11 @@ include "sources" {
   expose = true
 }
 
+include "tf_state" {
+  path   = find_in_parent_folders("tf-remote-state.hcl")
+  expose = true
+}
+
 terraform {
   source = include.sources.locals.tf_module_repos.networking
 }
