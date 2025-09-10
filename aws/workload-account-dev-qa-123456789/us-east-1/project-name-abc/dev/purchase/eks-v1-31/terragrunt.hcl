@@ -1,12 +1,16 @@
 #Include the parent terragrunt.hcl to inherit the remo
+include "root" {
+  path = find_in_parent_folders("root.hcl")
+}
+
 locals {
   cluster_name        = "purchase"
-  arn                 = "arn:aws:iam::590183980613:user/terraform-admin"
+  arn                 = "arn:aws:iam::851725450272:user/tf-admin"
   region              = "us-east-1"
 }
 
 include "root" {
-  path = find_in_parent_folders()
+  path = find_in_parent_folders("root.hcl")
 }
 
 include "sources" {
