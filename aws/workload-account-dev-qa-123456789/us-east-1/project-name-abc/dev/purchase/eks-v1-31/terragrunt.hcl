@@ -5,9 +5,8 @@ locals {
   region              = "us-east-1"
 }
 
-include "tf_state" {
+include "remote_state" {
   path   = find_in_parent_folders("tf-remote-state.hcl")
-  expose = true
 }
 
 include "sources" {

@@ -1,6 +1,7 @@
 locals {
-  bucket_name         = "infra-applications-terraform-satefile-14"
-  dynamodb_table_name = "infra-applications-terraform-state-lock-14"
+  bucket_name         = "infra-applications-terraform-satefile-15"
+  dynamodb_table_name = "infra-applications-terraform-state-lock-15"
+  account_id         = "123456789"
 }
 
 remote_state {
@@ -11,7 +12,7 @@ remote_state {
   }
   config = {
     bucket         = local.bucket_name
-    key            = "${path_relative_to_include()}/terraform.tfstate"
+    key            = "${local.account_id}/${path_relative_to_include()}/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
     dynamodb_table = local.dynamodb_table_name

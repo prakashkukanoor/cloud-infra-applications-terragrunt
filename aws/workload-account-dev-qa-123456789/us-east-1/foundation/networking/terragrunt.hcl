@@ -4,9 +4,8 @@ include "sources" {
   expose = true
 }
 
-include "tf_state" {
+include "remote_state" {
   path   = find_in_parent_folders("tf-remote-state.hcl")
-  expose = true
 }
 
 terraform {
