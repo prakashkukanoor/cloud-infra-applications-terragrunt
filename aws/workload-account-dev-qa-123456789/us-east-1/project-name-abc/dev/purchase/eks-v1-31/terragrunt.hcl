@@ -1,12 +1,12 @@
 #Include the parent terragrunt.hcl to inherit the remo
 locals {
   cluster_name        = "purchase"
-  arn                 = "arn:aws:iam::659260838969:user/terraform-admin"
+  arn                 = "arn:aws:iam::590183980613:user/terraform-admin"
   region              = "us-east-1"
 }
 
-include "remote_state" {
-  path   = find_in_parent_folders("tf-remote-state.hcl")
+include "root" {
+  path = find_in_parent_folders()
 }
 
 include "sources" {
