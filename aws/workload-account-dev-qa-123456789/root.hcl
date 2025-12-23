@@ -1,7 +1,7 @@
 locals {
-  common_vars = read_terragrunt_config(find_in_parent_folders("common.hcl"))
-  bucket_name         = local.common_vars.locals.bucket_name
-  dynamodb_table_name = local.common_vars.locals.dynamodb_table_name
+  bucket_name         = "infra-applications-terraform-satefile-19"
+  dynamodb_table_name = "infra-applications-terraform-state-lock-19"
+  account_id         = "123456789"
 }
 
 remote_state {
@@ -12,7 +12,7 @@ remote_state {
   }
   config = {
     bucket         = local.bucket_name
-    key            = "${path_relative_to_include()}/terraform.tfstate"
+    key            = "account-id-${local.account_id}/${path_relative_to_include()}/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
     dynamodb_table = local.dynamodb_table_name
