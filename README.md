@@ -2,29 +2,34 @@
 Repository for applications to configure the cloud infrastructure using terragrunt
 
 ## Terragrunt execution commands
-* Navigate to below location:
+1. Create Networking Resources by Navigate to below location:
 ```
-cd aws/workload-account-123456789/project-name-xyz
+cloud-infra-applications-terragrunt/aws/workload-account-dev-qa-123456789/us-east-1/shared/environment/dev/networking/terragrunt.hcl
 ```
 
-* Initialize the module:
+1.1. Initialize the module:
 ```
 terragrunt run-all init
 ```
 
-* terragrunt Plan:
+1.2. terragrunt Plan:
 ```
 terragrunt run-all plan -auto-approve
 ```
 
-* terragrunt apply:
+1.3. terragrunt apply:
 ```
 terragrunt run-all apply -auto-approve
 ```
 
-* Delete terragrunt files:
+1.4. Delete terragrunt files:
 ```
 find . -name ".terraform.lock.hcl" -type f -delete -o -name ".terragrunt-cache" -type d -exec rm -rf {} +
+```
+
+2. Create EKS Resources by Navigate to below location:
+```
+cloud-infra-applications-terragrunt/aws/workload-account-dev-qa-123456789/us-east-1/project-name-abc/dev/purchase/eks-v1-34
 ```
 
 
