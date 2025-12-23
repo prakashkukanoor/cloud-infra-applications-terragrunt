@@ -15,11 +15,13 @@ include "sources" {
 
 locals {
   cluster_name        = "purchase"
-  arn                 = "arn:aws:iam::590183891242:user/tf-admin"
+  arn                 = "arn:aws:iam::461759746933:user/tfadmin"
+  team                = "devops"
+  environment         = "dev"
 }
 
 dependency "networking" {
-  config_path = "${dirname(find_in_parent_folders("sources.hcl"))}/${include.regional.locals.region}/foundation/networking"
+  config_path = "${dirname(find_in_parent_folders("root.hcl"))}/${include.regional.locals.region}/shared/environment/${local.environment}/networking"
 }
 
 terraform {
@@ -28,20 +30,21 @@ terraform {
 
 inputs = {
   region      = include.regional.locals.region
-  team        = "devops"
-  environment = "dev"
+  team        = local.team
+  environment = local.environment
 
   cluster_name               = local.cluster_name
-  worker_node_instance_types = ["t2.micro"]
+  # worker_node_instance_types = ["t2.micro"]
   node_group_desired_size    = 3
   node_group_min_size        = 3
   node_group_max_size        = 4
-  capacity_type              = "ON_DEMAND"
+  # capacity_type              = "ON_DEMAND"
   private_subnets            = dependency.networking.outputs.application_private_subnet_ids
 
-  # instance_type = "t2.micro"
+  instance_type = "t2.micro"
+  filter_name = "amazon-eks-node-al2023-x86_64-standard-1.31-*"
   # number_of_ec2 = 2
-  # filter_name = "al2023-ami-2023.*-x86_64"
+
   applications = {
     functional_domain_01 = {
       buckets                        = ["product-105"]
