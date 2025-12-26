@@ -8,10 +8,10 @@ include "regional" {
   expose = true
 }
 
-include "sources" {
-  path   = find_in_parent_folders("sources.hcl")
-  expose = true
-}
+# include "sources" {
+#   path   = find_in_parent_folders("sources.hcl")
+#   expose = true
+# }
 
 locals {
   cluster_name        = "purchase"
@@ -25,7 +25,7 @@ dependency "networking" {
 }
 
 terraform {
-  source = include.sources.locals.tf_module_repos.eks
+  source = "git@github.com:prakashkukanoor/terraform-aws-module-root.git"
 }
 
 inputs = {
@@ -39,7 +39,7 @@ inputs = {
   node_group_min_size        = 3
   node_group_max_size        = 4
   # capacity_type              = "ON_DEMAND"
-  private_subnets            = dependency.networking.outputs.application_private_subnet_ids
+  application_private_subnet_ids            = dependency.networking.outputs.application_private_subnet_ids
 
   instance_type = "t2.micro"
   filter_name = "amazon-eks-node-al2023-x86_64-standard-1.31-*"
