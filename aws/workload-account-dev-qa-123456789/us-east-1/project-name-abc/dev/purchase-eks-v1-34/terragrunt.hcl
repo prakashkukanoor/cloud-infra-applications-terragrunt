@@ -15,7 +15,7 @@ include "sources" {
 
 locals {
   cluster_name        = "purchase"
-  arn                 = "arn:aws:iam::461759746933:user/tfadmin"
+  arn                 = "arn:aws:iam::049229311691:user/tf-admin"
   team                = "devops"
   environment         = "dev"
 }
