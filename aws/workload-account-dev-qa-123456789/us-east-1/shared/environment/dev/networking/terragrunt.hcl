@@ -3,10 +3,10 @@ include "root" {
   path = find_in_parent_folders("root.hcl")
 }
 
-include "sources" {
-  path   = find_in_parent_folders("sources.hcl")
-  expose = true
-}
+# include "sources" {
+#   path   = find_in_parent_folders("sources.hcl")
+#   expose = true
+# }
 
 include "regional" {
   path   = find_in_parent_folders("regional.hcl")
@@ -14,7 +14,7 @@ include "regional" {
 }
 
 terraform {
-  source = include.sources.locals.tf_module_repos.networking
+  source = "git@github.com:prakashkukanoor/terraform-aws-vpc-subnets-routetable.git?ref=v1.0.5"
 }
 
 
