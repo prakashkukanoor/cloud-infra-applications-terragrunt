@@ -15,7 +15,7 @@ include "regional" {
 
 locals {
   cluster_name        = "purchase"
-  arn                 = "arn:aws:iam::049229311691:user/tf-admin"
+  arn                 = "arn:aws:iam::767397771767:user/tf-admin"
   team                = "devops"
   environment         = "dev"
 }
