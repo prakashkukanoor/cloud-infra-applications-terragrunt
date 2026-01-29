@@ -8,15 +8,18 @@ cloud-infra-applications-terragrunt/aws/workload-account-dev-qa-123456789/us-eas
 ```
 1.1. Initialize the module:
 ```
-terragrunt run-all init
+tginit
+alias tginit="terragrunt run-all init"
 ```
 1.2. terragrunt Plan:
 ```
-terragrunt run-all plan -auto-approve
+tgplan
+alias tgplan="terragrunt run-all plan"
 ```
 1.3. terragrunt apply:
 ```
-terragrunt run-all apply -auto-approve
+tgapprove
+alias tgapprove="terragrunt run-all apply -auto-approve"
 ```
 1.4. Delete terragrunt files:
 ```

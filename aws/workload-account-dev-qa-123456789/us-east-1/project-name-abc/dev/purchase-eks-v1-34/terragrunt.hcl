@@ -15,7 +15,7 @@ include "regional" {
 
 locals {
   cluster_name        = "purchase"
-  arn                 = "arn:aws:iam::329482599025:user/tf-admin"
+  arn                 = "arn:aws:iam::381492137270:user/tf-admin"
   team                = "devops"
   environment         = "dev"
 }
@@ -47,7 +47,7 @@ inputs = {
   # number_of_ec2 = 2
 
   applications = {
-    functional_domain_01 = {
+    product = {
       buckets                        = ["product-105"]
       dynamodb_tables                = ["dynamo-db-105"]
       # postgres                        = ["product-105"]
@@ -60,14 +60,14 @@ inputs = {
           instance_class       = "db.t3.micro"
           username             = "adminuser"
           password             = "Admin12345!"
-          # parameter_group_name = "default.postgres13"
+          db_family            = "postgres14"
           skip_final_snapshot  = true
-          db_name = "product105"
+          db_names = ["product105"]
           identifier = "db-product-rds-105"
         }
     }
-    functional_domain_02 = {
-      buckets                        = ["product-103"]
+    purchase = {
+      buckets                        = ["purchase-103"]
       dynamodb_tables                = ["dynamo-db-103"]
       # postgres                        = ["product-103"]
       arn                            = local.arn
@@ -79,10 +79,10 @@ inputs = {
           instance_class       = "db.t3.micro"
           username             = "adminuser"
           password             = "Admin12345!"
-          # parameter_group_name = "default.postgres13"
+          db_family            = "postgres14"
           skip_final_snapshot  = true
-          db_name = "product103"
-          identifier = "dbproduct-rds-103"
+          db_names = ["purchase103"]
+          identifier = "dbpurchase-rds-103"
         }
     }
 
