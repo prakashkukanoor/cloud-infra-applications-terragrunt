@@ -15,7 +15,7 @@ include "regional" {
 
 locals {
   cluster_name        = "purchase"
-  arn                 = "arn:aws:iam::381492137270:user/tf-admin"
+  arn                 = "arn:aws:iam::339712717889:user/tf-admin"
   team                = "devops"
   environment         = "dev"
 }
@@ -41,6 +41,8 @@ inputs = {
   # capacity_type              = "ON_DEMAND"
   application_private_subnet_ids            = dependency.networking.outputs.application_private_subnet_ids
   db_subnet_ids = dependency.networking.outputs.database_private_subnet_ids
+  db_subnets_ipv4_cidr = dependency.networking.outputs.database_private_subnets_ipv4_cidr_block
+  vpc_id = dependency.networking.outputs.vpc_id
 
   instance_type = "t2.micro"
   filter_name = "amazon-eks-node-al2023-x86_64-standard-1.31-*"
