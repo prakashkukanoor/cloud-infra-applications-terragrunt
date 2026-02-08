@@ -15,7 +15,7 @@ include "regional" {
 
 locals {
   cluster_name        = "purchase"
-  arn                 = "arn:aws:iam::339712717889:user/tf-admin"
+  arn                 = "arn:aws:iam::294250598557:user/tf-admin"
   team                = "devops"
   environment         = "dev"
 }
@@ -64,8 +64,6 @@ inputs = {
           password             = "Admin12345!"
           db_family            = "postgres14"
           skip_final_snapshot  = true
-          db_names = ["product105"]
-          identifier = "db-product-rds-105"
         }
     }
     purchase = {
@@ -83,8 +81,6 @@ inputs = {
           password             = "Admin12345!"
           db_family            = "postgres14"
           skip_final_snapshot  = true
-          db_names = ["purchase103"]
-          identifier = "dbpurchase-rds-103"
         }
     }
 
