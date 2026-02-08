@@ -15,7 +15,7 @@ include "regional" {
 
 locals {
   cluster_name        = "purchase"
-  arn                 = "arn:aws:iam::767397771767:user/tf-admin"
+  arn                 = "arn:aws:iam::058264258124:user/tf-admin"
   team                = "devops"
   environment         = "dev"
 }
@@ -40,25 +40,46 @@ inputs = {
   node_group_max_size        = 4
   # capacity_type              = "ON_DEMAND"
   application_private_subnet_ids            = dependency.networking.outputs.application_private_subnet_ids
+  db_subnet_ids = dependency.networking.outputs.database_private_subnet_ids
+  db_subnets_ipv4_cidr = dependency.networking.outputs.database_private_subnets_ipv4_cidr_block
+  vpc_id = dependency.networking.outputs.vpc_id
 
   instance_type = "t2.micro"
   filter_name = "amazon-eks-node-al2023-x86_64-standard-1.31-*"
   # number_of_ec2 = 2
 
   applications = {
-    functional_domain_01 = {
+    product = {
       buckets                        = ["product-105"]
       dynamodb_tables                = ["dynamo-db-105"]
       arn                            = local.arn
       s3_policy_json_tpl_path        = "${get_terragrunt_dir()}/policy/s3_policy.json.tpl"
       dynamo_db_policy_json_tpl_path = "${get_terragrunt_dir()}/policy/dynamodb_policy.json.tpl"
+      postgress = {
+          engine               = "postgres"
+          engine_version       = "14.20"
+          instance_class       = "db.t3.micro"
+          username             = "adminuser"
+          password             = "Admin12345!"
+          db_family            = "postgres14"
+          skip_final_snapshot  = true
+        }
     }
-    functional_domain_02 = {
-      buckets                        = ["product-103"]
+    purchase = {
+      buckets                        = ["purchase-103"]
       dynamodb_tables                = ["dynamo-db-103"]
       arn                            = local.arn
       s3_policy_json_tpl_path        = "${get_terragrunt_dir()}/policy/s3_policy.json.tpl"
       dynamo_db_policy_json_tpl_path = "${get_terragrunt_dir()}/policy/dynamodb_policy.json.tpl"
+      postgress = {
+          engine               = "postgres"
+          engine_version       = "14.20"
+          instance_class       = "db.t3.micro"
+          username             = "adminuser"
+          password             = "Admin12345!"
+          db_family            = "postgres14"
+          skip_final_snapshot  = true
+        }
     }
 
   }
