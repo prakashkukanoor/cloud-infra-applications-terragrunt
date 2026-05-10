@@ -15,7 +15,7 @@ include "regional" {
 
 locals {
   cluster_name        = "purchase"
-  arn                 = "arn:aws:iam::444847049446:user/tf-admin"
+  arn                 = "arn:aws:iam::390700680493:user/tf-admin"
   team                = "devops"
   environment         = "dev"
 }
@@ -34,10 +34,11 @@ inputs = {
   environment = local.environment
 
   cluster_name               = local.cluster_name
+  eks_version = "1.33"
   # worker_node_instance_types = ["t2.micro"]
-  node_group_desired_size    = 3
-  node_group_min_size        = 3
-  node_group_max_size        = 4
+  eks_worker_node_desired_capacity    = 2
+  eks_worker_node_min_size        = 1
+  eks_worker_node_max_size        = 3
   # capacity_type              = "ON_DEMAND"
   application_private_subnet_ids            = dependency.networking.outputs.application_private_subnet_ids
   db_subnet_ids = dependency.networking.outputs.database_private_subnet_ids
@@ -50,6 +51,7 @@ inputs = {
 
   applications = {
     product = {
+      services = ["product-01"]
       buckets                        = ["product-105"]
       dynamodb_tables                = ["dynamo-db-105"]
       arn                            = local.arn
@@ -66,6 +68,7 @@ inputs = {
         }
     }
     purchase = {
+      services = ["purchase-01"]
       buckets                        = ["purchase-103"]
       dynamodb_tables                = ["dynamo-db-103"]
       arn                            = local.arn
