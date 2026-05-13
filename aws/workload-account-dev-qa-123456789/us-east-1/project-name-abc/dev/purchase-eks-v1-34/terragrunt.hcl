@@ -15,7 +15,7 @@ include "regional" {
 
 locals {
   cluster_name        = "purchase"
-  arn                 = "arn:aws:iam::390700680493:user/tf-admin"
+  arn                 = "arn:aws:iam::810305106710:user/tf-user"
   team                = "devops"
   environment         = "dev"
 }
@@ -35,7 +35,8 @@ inputs = {
 
   cluster_name               = local.cluster_name
   eks_version = "1.33"
-  # worker_node_instance_types = ["t2.micro"]
+  eks_endpoint_private_access = false
+  eks_endpoint_public_access = true
   eks_worker_node_desired_capacity    = 2
   eks_worker_node_min_size        = 1
   eks_worker_node_max_size        = 3
