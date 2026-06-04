@@ -18,7 +18,7 @@ locals {
   arn                 = "arn:aws:iam::974197459140:user/tf-admin"
   console_user        = "arn:aws:iam::974197459140:user/cloud_user"
   team                = "devops"
-  environment         = "dev"
+  environment         = "qa"
 }
 
 dependency "networking" {

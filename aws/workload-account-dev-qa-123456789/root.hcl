@@ -1,6 +1,6 @@
 locals {
-  bucket_name         = "infra-applications-terraform-satefile-19"
-  dynamodb_table_name = "infra-applications-terraform-state-lock-19"
+  bucket_name         = "infra-applications-terraform-satefile-20"
+  dynamodb_table_name = "infra-applications-terraform-state-lock-20"
   account_id         = "123456789"
 }
 
