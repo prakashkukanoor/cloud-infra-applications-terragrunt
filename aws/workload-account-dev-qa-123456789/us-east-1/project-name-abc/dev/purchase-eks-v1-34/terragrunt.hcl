@@ -15,8 +15,8 @@ include "regional" {
 
 locals {
   cluster_name        = "purchase"
-  arn                 = "arn:aws:iam::974197459140:user/tf-admin"
-  console_user        = "arn:aws:iam::974197459140:user/cloud_user"
+  aws_account_number  = "851725267504"
+  arn                 = "arn:aws:iam::851725267504:user/tf-admin"
   team                = "devops"
   environment         = "dev"
 }
@@ -49,16 +49,12 @@ inputs = {
 
   instance_type = "t2.micro"
   ami_type = "amazon-linux-2023/x86_64/standard"
-  eks_iam_access = [
-    {
-      user_arn = "${local.arn}"
-      role   = "admin"
-    },
-    {
-      user_arn = "${local.console_user}"
-      role   = "admin"
-    }
-  ]
+  aws_account_number = local.aws_account_number
+  eks_iam_user_access = {
+    admin = ["cloud_user"]
+    editor = []
+    viewer = []
+  }
 
   applications = {
     product = {
