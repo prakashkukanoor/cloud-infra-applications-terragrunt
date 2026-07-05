@@ -15,8 +15,8 @@ include "regional" {
 
 locals {
   cluster_name        = "purchase"
-  aws_account_number  = "851725267504"
-  arn                 = "arn:aws:iam::851725267504:user/tf-admin"
+  aws_account_number  = "159014723635"
+  arn                 = "arn:aws:iam::159014723635:user/tf-admin"
   team                = "devops"
   environment         = "dev"
 }
@@ -38,16 +38,16 @@ inputs = {
   eks_version = "1.33"
   eks_endpoint_private_access = false
   eks_endpoint_public_access = true
-  eks_worker_node_desired_capacity    = 2
-  eks_worker_node_min_size        = 1
-  eks_worker_node_max_size        = 3
+  eks_worker_node_desired_capacity    = 3
+  eks_worker_node_min_size        = 3
+  eks_worker_node_max_size        = 6
   # capacity_type              = "ON_DEMAND"
   application_private_subnet_ids            = dependency.networking.outputs.application_private_subnet_ids
   db_subnet_ids = dependency.networking.outputs.database_private_subnet_ids
   db_subnets_ipv4_cidr = dependency.networking.outputs.database_private_subnets_ipv4_cidr_block
   vpc_id = dependency.networking.outputs.vpc_id
 
-  instance_type = "t2.micro"
+  instance_type = "t3.medium"
   ami_type = "amazon-linux-2023/x86_64/standard"
   aws_account_number = local.aws_account_number
   eks_iam_user_access = {
