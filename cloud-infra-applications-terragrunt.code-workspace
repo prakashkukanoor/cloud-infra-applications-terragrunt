@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../terraform-aws-load-balancer"
+		},
+		{
+			"path": "../terraform-aws-module-root"
+		},
+		{
+			"path": "../k8s-deployments"
+		},
+		{
+			"path": "../terraform-aws-eks-module"
+		}
+	]
+}

@@ -15,8 +15,8 @@ include "regional" {
 
 locals {
   cluster_name        = "purchase"
-  aws_account_number  = "859616339147"
-  arn                 = "arn:aws:iam::859616339147:user/tf-admin"
+  aws_account_number  = "891377318752"
+  arn                 = "arn:aws:iam::891377318752:user/tf-admin"
   team                = "devops"
   environment         = "dev"
 }
@@ -30,10 +30,18 @@ terraform {
 }
 
 inputs = {
+  # ==============================================================================
+  # DESCRIPTION: Common Variables used in most or all of the modules
+  # ENV / REGION: DEV / us-east-1
+  # ==============================================================================
   region      = include.regional.locals.region
   team        = local.team
   environment = local.environment
 
+  # ==============================================================================
+  # MODULE COMPONENT: EKS Cluster module configurations
+  # DESCRIPTION: Cluster provisioned in private subnets
+  # ==============================================================================
   cluster_name               = local.cluster_name
   eks_version = "1.33"
   eks_endpoint_private_access = false
@@ -46,7 +54,6 @@ inputs = {
   db_subnet_ids = dependency.networking.outputs.database_private_subnet_ids
   db_subnets_ipv4_cidr = dependency.networking.outputs.database_private_subnets_ipv4_cidr_block
   vpc_id = dependency.networking.outputs.vpc_id
-
   instance_type = "t3.medium"
   ami_type = "amazon-linux-2023/x86_64/standard"
   aws_account_number = local.aws_account_number
@@ -55,6 +62,22 @@ inputs = {
     editor = []
     viewer = []
   }
+
+  # ==============================================================================
+  # MODULE COMPONENT: Load Balancer - Application or Network
+  # DESCRIPTION: Support for both public or private load balancer
+  # ==============================================================================
+  application_public_subnet_ids = dependency.networking.outputs.application_public_subnet_ids
+  load_balancer_type = "application"
+  load_balancing_algorithm_type = "round_robin"
+  ingress_node_port = 31234
+  is_lb_internal = false
+  target_type = "instance"
+
+  # ==============================================================================
+  # MODULE COMPONENT: RDS, S3 etc.
+  # DESCRIPTION: Application teams can manage required resource for specific namespace.
+  # ==============================================================================
 
   applications = {
     product = {
