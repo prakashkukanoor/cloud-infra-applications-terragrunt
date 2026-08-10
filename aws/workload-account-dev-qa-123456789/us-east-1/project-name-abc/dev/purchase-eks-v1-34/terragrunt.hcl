@@ -14,11 +14,11 @@ include "regional" {
 # }
 
 locals {
-  cluster_name        = "purchase"
-  aws_account_number  = "891377318752"
-  arn                 = "arn:aws:iam::891377318752:user/tf-admin"
-  team                = "devops"
-  environment         = "dev"
+  cluster_name       = "purchase"
+  aws_account_number = "142236301409"
+  arn                = "arn:aws:iam::142236301409:user/tf-admin"
+  team               = "devops"
+  environment        = "dev"
 }
 
 dependency "networking" {
@@ -42,23 +42,23 @@ inputs = {
   # MODULE COMPONENT: EKS Cluster module configurations
   # DESCRIPTION: Cluster provisioned in private subnets
   # ==============================================================================
-  cluster_name               = local.cluster_name
-  eks_version = "1.33"
-  eks_endpoint_private_access = false
-  eks_endpoint_public_access = true
-  eks_worker_node_desired_capacity    = 3
-  eks_worker_node_min_size        = 3
-  eks_worker_node_max_size        = 6
+  cluster_name                     = local.cluster_name
+  eks_version                      = "1.33"
+  eks_endpoint_private_access      = false
+  eks_endpoint_public_access       = true
+  eks_worker_node_desired_capacity = 3
+  eks_worker_node_min_size         = 3
+  eks_worker_node_max_size         = 6
   # capacity_type              = "ON_DEMAND"
-  application_private_subnet_ids            = dependency.networking.outputs.application_private_subnet_ids
-  db_subnet_ids = dependency.networking.outputs.database_private_subnet_ids
-  db_subnets_ipv4_cidr = dependency.networking.outputs.database_private_subnets_ipv4_cidr_block
-  vpc_id = dependency.networking.outputs.vpc_id
-  instance_type = "t3.medium"
-  ami_type = "amazon-linux-2023/x86_64/standard"
-  aws_account_number = local.aws_account_number
+  application_private_subnet_ids = dependency.networking.outputs.application_private_subnet_ids
+  db_subnet_ids                  = dependency.networking.outputs.database_private_subnet_ids
+  db_subnets_ipv4_cidr           = dependency.networking.outputs.database_private_subnets_ipv4_cidr_block
+  vpc_id                         = dependency.networking.outputs.vpc_id
+  instance_type                  = "t3.medium"
+  ami_type                       = "amazon-linux-2023/x86_64/standard"
+  aws_account_number             = local.aws_account_number
   eks_iam_user_access = {
-    admin = ["cloud_user"]
+    admin  = ["cloud_user"]
     editor = []
     viewer = []
   }
@@ -68,11 +68,12 @@ inputs = {
   # DESCRIPTION: Support for both public or private load balancer
   # ==============================================================================
   application_public_subnet_ids = dependency.networking.outputs.application_public_subnet_ids
-  load_balancer_type = "application"
+  load_balancer_type            = "application"
   load_balancing_algorithm_type = "round_robin"
-  ingress_node_port = 31234
-  is_lb_internal = false
-  target_type = "instance"
+  lb_targetGroup_port           = 31234
+  lb_healthCheck_port           = 31903
+  is_lb_internal                = false
+  target_type                   = "instance"
 
   # ==============================================================================
   # MODULE COMPONENT: RDS, S3 etc.
@@ -81,38 +82,38 @@ inputs = {
 
   applications = {
     product = {
-      services = ["product-01"]
+      services                       = ["product-01"]
       buckets                        = ["product-106"]
       dynamodb_tables                = ["dynamo-db-106"]
       arn                            = local.arn
       s3_policy_json_tpl_path        = "${get_terragrunt_dir()}/policy/s3_policy.json.tpl"
       dynamo_db_policy_json_tpl_path = "${get_terragrunt_dir()}/policy/dynamodb_policy.json.tpl"
       postgress = {
-          engine               = "postgres"
-          engine_version       = "14.20"
-          instance_class       = "db.t3.micro"
-          username             = "adminuser"
-          password             = "Admin12345!"
-          db_family            = "postgres14"
-          skip_final_snapshot  = true
-        }
+        engine              = "postgres"
+        engine_version      = "14.20"
+        instance_class      = "db.t3.micro"
+        username            = "adminuser"
+        password            = "Admin12345!"
+        db_family           = "postgres14"
+        skip_final_snapshot = true
+      }
     }
     purchase = {
-      services = ["purchase-01"]
+      services                       = ["purchase-01"]
       buckets                        = ["purchase-105"]
       dynamodb_tables                = ["dynamo-db-105"]
       arn                            = local.arn
       s3_policy_json_tpl_path        = "${get_terragrunt_dir()}/policy/s3_policy.json.tpl"
       dynamo_db_policy_json_tpl_path = "${get_terragrunt_dir()}/policy/dynamodb_policy.json.tpl"
       postgress = {
-          engine               = "postgres"
-          engine_version       = "14.20"
-          instance_class       = "db.t3.micro"
-          username             = "adminuser"
-          password             = "Admin12345!"
-          db_family            = "postgres14"
-          skip_final_snapshot  = true
-        }
+        engine              = "postgres"
+        engine_version      = "14.20"
+        instance_class      = "db.t3.micro"
+        username            = "adminuser"
+        password            = "Admin12345!"
+        db_family           = "postgres14"
+        skip_final_snapshot = true
+      }
     }
 
   }
