@@ -10,10 +10,10 @@
 			"path": "../terraform-aws-module-root"
 		},
 		{
-			"path": "../k8s-deployments"
+			"path": "../terraform-aws-eks-module"
 		},
 		{
-			"path": "../terraform-aws-eks-module"
+			"path": "../helm-charts"
 		}
 	]
 }
