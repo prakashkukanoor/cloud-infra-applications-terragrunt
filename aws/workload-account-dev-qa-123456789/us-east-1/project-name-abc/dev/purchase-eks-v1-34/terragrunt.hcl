@@ -1,6 +1,7 @@
 #Include the parent terragrunt.hcl to inherit the remo
 include "root" {
   path = find_in_parent_folders("root.hcl")
+  expose = true
 }
 
 include "regional" {
@@ -15,8 +16,8 @@ include "regional" {
 
 locals {
   cluster_name       = "purchase"
-  aws_account_number = "703110344418"
-  arn                = "arn:aws:iam::703110344418:user/tf-admin"
+  aws_account_number = include.root.locals.aws_account_number
+  arn                = include.root.locals.tf_admin_arn
   team               = "devops"
   environment        = "dev"
 }

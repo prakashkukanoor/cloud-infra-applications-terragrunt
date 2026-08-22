@@ -14,7 +14,7 @@ cloud-infra-applications-terragrunt/aws/workload-account-dev-qa-123456789/us-eas
 
     1.2. terragrunt Plan:
     ```
-    terragrunt run-all plan -auto-approve
+    terragrunt run-all plan
     ```
 
     1.3. terragrunt apply:
