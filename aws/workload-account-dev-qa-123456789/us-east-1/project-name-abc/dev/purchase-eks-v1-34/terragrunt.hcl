@@ -15,8 +15,8 @@ include "regional" {
 
 locals {
   cluster_name       = "purchase"
-  aws_account_number = "068264331744"
-  arn                = "arn:aws:iam::068264331744:user/tf-admin"
+  aws_account_number = "703110344418"
+  arn                = "arn:aws:iam::703110344418:user/tf-admin"
   team               = "devops"
   environment        = "dev"
 }
@@ -68,8 +68,8 @@ inputs = {
   # DESCRIPTION: Support for both public or private load balancer
   # ==============================================================================
   application_public_subnet_ids = dependency.networking.outputs.application_public_subnet_ids
-  load_balancer_type            = "application"
-  load_balancing_algorithm_type = "round_robin"
+  load_balancer_type            = "network" #"application/network"
+  load_balancing_algorithm_type = "round_robin" # not applicable for NLB
   lb_targetGroup_port           = 31234
   lb_healthCheck_port           = 31903
   is_lb_internal                = false
