@@ -1,8 +1,8 @@
 locals {
   bucket_name         = "infra-applications-terraform-satefile-22"
   dynamodb_table_name = "infra-applications-terraform-state-lock-22"
-  aws_account_number         = "968220652414"
-  tf_admin_arn = "arn:aws:iam::968220652414:user/tf-admin"
+  aws_account_number  = "891572012759"
+  tf_admin_arn        = "arn:aws:iam::891572012759:user/tf-admin"
 }
 
 remote_state {

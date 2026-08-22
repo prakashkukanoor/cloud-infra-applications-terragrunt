@@ -7,6 +7,10 @@ Repository for applications to configure the cloud infrastructure using terragru
 cloud-infra-applications-terragrunt/aws/workload-account-dev-qa-123456789/us-east-1/shared/environment/dev/networking/terragrunt.hcl
 ```
 
+    1.0. Terragrunt fmt:
+    ```
+    terragrunt hclfmt
+    ```
     1.1. Initialize the module:
     ```
     terragrunt run-all init

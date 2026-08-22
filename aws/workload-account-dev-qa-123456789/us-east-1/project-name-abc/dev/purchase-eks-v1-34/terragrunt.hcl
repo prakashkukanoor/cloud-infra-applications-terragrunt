@@ -1,6 +1,6 @@
 #Include the parent terragrunt.hcl to inherit the remo
 include "root" {
-  path = find_in_parent_folders("root.hcl")
+  path   = find_in_parent_folders("root.hcl")
   expose = true
 }
 
@@ -69,7 +69,7 @@ inputs = {
   # DESCRIPTION: Support for both public or private load balancer
   # ==============================================================================
   application_public_subnet_ids = dependency.networking.outputs.application_public_subnet_ids
-  load_balancer_type            = "network" #"application/network"
+  load_balancer_type            = "network"     #"application/network"
   load_balancing_algorithm_type = "round_robin" # not applicable for NLB
   lb_targetGroup_port           = 31234
   lb_healthCheck_port           = 31903
