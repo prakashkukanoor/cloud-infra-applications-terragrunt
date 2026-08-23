@@ -1,6 +1,10 @@
 #Include the parent terragrunt.hcl to inherit the remo
 include "root" {
   path   = find_in_parent_folders("root.hcl")
+}
+
+include "account" {
+  path   = find_in_parent_folders("account.hcl")
   expose = true
 }
 
@@ -9,15 +13,15 @@ include "regional" {
   expose = true
 }
 
-# include "sources" {
-#   path   = find_in_parent_folders("sources.hcl")
-#   expose = true
-# }
+include "sources" {
+  path   = find_in_parent_folders("sources.hcl")
+  expose = true
+}
 
 locals {
   cluster_name       = "purchase"
-  aws_account_number = include.root.locals.aws_account_number
-  arn                = include.root.locals.tf_admin_arn
+  aws_account_number = include.account.locals.aws_account_number
+  arn                = include.account.locals.tf_admin_arn
   team               = "devops"
   environment        = "dev"
 }
@@ -27,7 +31,7 @@ dependency "networking" {
 }
 
 terraform {
-  source = "git@github.com:prakashkukanoor/terraform-aws-module-root.git"
+  source = "${include.sources.locals.tf_modules.root_module}"
 }
 
 inputs = {
