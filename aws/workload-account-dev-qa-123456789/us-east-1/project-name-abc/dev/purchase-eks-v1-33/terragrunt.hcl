@@ -20,8 +20,8 @@ include "sources" {
 
 locals {
   cluster_name       = "purchase"
-  aws_account_number = include.account.locals.aws_account_number
-  arn                = include.account.locals.tf_admin_arn
+  # aws_account_number = include.account.locals.aws_account_number
+  # arn                = include.account.locals.tf_admin_arn
   team               = "devops"
   environment        = "dev"
 }
@@ -61,7 +61,7 @@ inputs = {
   vpc_id                         = dependency.networking.outputs.vpc_id
   instance_type                  = "t3.medium"
   ami_type                       = "amazon-linux-2023/x86_64/standard"
-  aws_account_number             = local.aws_account_number
+  aws_account_number             = "${include.account.locals.aws_account_number}"
   eks_iam_user_access = {
     admin  = ["cloud_user"]
     editor = []
@@ -87,10 +87,10 @@ inputs = {
 
   applications = {
     product = {
-      services                       = ["product-01"]
-      buckets                        = ["product-106"]
-      dynamodb_tables                = ["dynamo-db-106"]
-      arn                            = local.arn
+      services                       = ["product-02"]
+      buckets                        = ["product-107"]
+      dynamodb_tables                = ["dynamo-db-107"]
+      arn                            = "${include.account.locals.tf_admin_arn}"
       s3_policy_json_tpl_path        = "${get_terragrunt_dir()}/policy/s3_policy.json.tpl"
       dynamo_db_policy_json_tpl_path = "${get_terragrunt_dir()}/policy/dynamodb_policy.json.tpl"
       postgress = {
@@ -104,10 +104,10 @@ inputs = {
       }
     }
     purchase = {
-      services                       = ["purchase-01"]
-      buckets                        = ["purchase-105"]
-      dynamodb_tables                = ["dynamo-db-105"]
-      arn                            = local.arn
+      services                       = ["purchase-02"]
+      buckets                        = ["purchase-108"]
+      dynamodb_tables                = ["dynamo-db-108"]
+      arn                            = "${include.account.locals.tf_admin_arn}"
       s3_policy_json_tpl_path        = "${get_terragrunt_dir()}/policy/s3_policy.json.tpl"
       dynamo_db_policy_json_tpl_path = "${get_terragrunt_dir()}/policy/dynamodb_policy.json.tpl"
       postgress = {

@@ -1,11 +1,7 @@
-include "account" {
-  path   = include("account.hcl")
-  expose = true
-}
-
 locals {
-  bucket_name         = "infra-applications-terraform-satefile-22"
-  dynamodb_table_name = "infra-applications-terraform-state-lock-22"
+  bucket_name         = "infra-applications-terraform-satefile-23"
+  dynamodb_table_name = "infra-applications-terraform-state-lock-23"
+  account  = read_terragrunt_config(find_in_parent_folders("account.hcl"))
 }
 
 remote_state {
@@ -16,7 +12,7 @@ remote_state {
   }
   config = {
     bucket         = local.bucket_name
-    key            = "account-id-${include.account.locals.aws_account_number}/${path_relative_to_include()}/terraform.tfstate"
+    key            = "account-id-${local.account.locals.aws_account_number}/${path_relative_to_include()}/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
     dynamodb_table = local.dynamodb_table_name
