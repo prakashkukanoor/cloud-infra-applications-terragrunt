@@ -7,29 +7,36 @@ Repository for applications to configure the cloud infrastructure using terragru
 cloud-infra-applications-terragrunt/aws/workload-account-dev-qa-123456789/us-east-1/shared/environment/dev/networking/terragrunt.hcl
 ```
 
-    1.0. Terragrunt fmt:
-    ```
-    terragrunt hclfmt
-    ```
-    1.1. Initialize the module:
-    ```
-    terragrunt run-all init
-    ```
+1.0. Set AWS Profile & Terragrunt to create s3 bukcet for state file is not exist:
+```
+export AWS_PROFILE=dev
+export TG_BACKEND_BOOTSTRAP=true
+```
 
-    1.2. terragrunt Plan:
-    ```
-    terragrunt run-all plan
-    ```
+1.1. Terragrunt fmt:
+```
+terragrunt hclfmt
+```
 
-    1.3. terragrunt apply:
-    ```
-    terragrunt run-all apply -auto-approve
-    ```
+1.2. Initialize the module:
+```
+terragrunt run-all init
+```
 
-    1.4. Delete terragrunt files:
-    ```
-    find . -name ".terraform.lock.hcl" -type f -delete -o -name ".terragrunt-cache" -type d -exec rm -rf {} +
-    ```
+1.3. terragrunt Plan:
+```
+terragrunt run-all plan
+```
+
+1.4. terragrunt apply:
+```
+terragrunt run-all apply -auto-approve
+```
+
+1.5. Delete terragrunt files:
+```
+find . -name ".terraform.lock.hcl" -type f -delete -o -name ".terragrunt-cache" -type d -exec rm -rf {} +
+```
 
 2. Create EKS Resources by Navigate to below location:
 ```

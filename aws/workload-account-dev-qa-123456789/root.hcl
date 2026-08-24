@@ -1,6 +1,6 @@
 locals {
-  bucket_name         = "infra-applications-terraform-satefile-23"
-  dynamodb_table_name = "infra-applications-terraform-state-lock-23"
+  bucket_name         = "infra-applications-terraform-satefile-24"
+  dynamodb_table_name = "infra-applications-terraform-state-lock-24"
   account  = read_terragrunt_config(find_in_parent_folders("account.hcl"))
 }
 
