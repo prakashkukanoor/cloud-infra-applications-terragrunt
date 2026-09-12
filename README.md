@@ -9,9 +9,14 @@ cloud-infra-applications-terragrunt/aws/workload-account-dev-qa-123456789/us-eas
 
 1.0. Set AWS Profile & Terragrunt to create s3 bukcet for state file is not exist:
 ```
+Add IAM user arn to 
+cloud-infra-applications-terragrunt/aws/workload-account-dev-qa-123456789/account.hcl
+```
+```
 aws configure --profile dev
+```
+```
 export AWS_PROFILE=dev
-Add user arn to /Users/prakashkukanoor/Documents/GIT/cloud-infra-applications-terragrunt/aws/workload-account-dev-qa-123456789/account.hcl
 ```
 
 1.1. Terragrunt fmt:
