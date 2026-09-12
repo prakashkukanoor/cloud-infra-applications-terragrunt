@@ -20,17 +20,17 @@ terragrunt hclfmt
 
 1.2. Initialize the module:
 ```
-terragrunt run-all init
+terragrunt run --all init
 ```
 
 1.3. terragrunt Plan:
 ```
-terragrunt run-all plan
+terragrunt run --all plan
 ```
 
 1.4. terragrunt apply:
 ```
-terragrunt run-all apply -auto-approve
+terragrunt run --all apply -- -auto-approve
 ```
 
 1.5. Delete terragrunt files:

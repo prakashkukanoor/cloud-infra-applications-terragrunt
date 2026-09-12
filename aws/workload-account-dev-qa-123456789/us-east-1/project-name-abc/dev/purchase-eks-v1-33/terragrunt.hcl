@@ -20,8 +20,6 @@ include "sources" {
 
 locals {
   cluster_name       = "purchase"
-  # aws_account_number = include.account.locals.aws_account_number
-  # arn                = include.account.locals.tf_admin_arn
   team               = "devops"
   environment        = "dev"
 }
