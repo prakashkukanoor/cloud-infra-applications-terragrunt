@@ -4,13 +4,14 @@ Repository for applications to configure the cloud infrastructure using terragru
 ## Terragrunt execution commands
 1. Create Networking Resources by Navigate to below location:
 ```
-cloud-infra-applications-terragrunt/aws/workload-account-dev-qa-123456789/us-east-1/shared/environment/dev/networking/terragrunt.hcl
+cloud-infra-applications-terragrunt/aws/workload-account-dev-qa-123456789/us-east-1/shared/environment/dev/networking
 ```
 
 1.0. Set AWS Profile & Terragrunt to create s3 bukcet for state file is not exist:
 ```
+aws configure --profile dev
 export AWS_PROFILE=dev
-export TG_BACKEND_BOOTSTRAP=true
+Add user arn to /Users/prakashkukanoor/Documents/GIT/cloud-infra-applications-terragrunt/aws/workload-account-dev-qa-123456789/account.hcl
 ```
 
 1.1. Terragrunt fmt:
